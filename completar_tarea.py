@@ -14,16 +14,3 @@ def marcar_completada(conn, id_tarea):
     cursor.execute('UPDATE tareas SET completada = 1 WHERE id = ?', (id_tarea,))
     conn.commit()
     print("Tarea marcada como completada.")
-
-def main():
-    conn = sqlite3.connect('lista_de_tareas.db')
-    
-    mostrar_tareas_pendientes(conn)
-    
-    id_tarea = input("Ingrese el número de la tarea a marcar como completada: ")
-    marcar_completada(conn, id_tarea)
-    
-    conn.close()
-
-if __name__ == "__main__":
-    main()
