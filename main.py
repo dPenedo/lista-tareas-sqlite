@@ -1,7 +1,7 @@
 import sqlite3
 import mostrar_pendientes
 import marcar_completadas 
-import crear_nota
+import crear_tarea
 import os
 
 
@@ -22,23 +22,27 @@ def mostrar_menu():
 def main():
     conn = sqlite3.connect('lista_de_tareas.db')
     os.system("clear")
+    print(f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}")
     while True:
-        print(f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}")
         print("\nEstas son las Tareas que tienes pendientes:\n") 
         mostrar_pendientes.mostrar_pendientes(conn)
-        print(f"\n{COLOR_BOLD}***************************{COLOR_RESET}")
-        print(f"{COLOR_BOLD}***************************{COLOR_RESET}\n")
-        print(f"{COLOR_BLUE_TITLE}¿Qué deseas hacer?{COLOR_RESET}")
+        print("\n╚" + "═" * 48 + "╝")
+        print("╔" + "═" * 48 + "╗")
+        print(f"\n{COLOR_BLUE_TITLE}¿Qué deseas hacer?{COLOR_RESET}")
         mostrar_menu()
         opcion = input()
         if opcion == "1":
+            os.system("clear")
             print("Ahí van de nuevo:")
-            mostrar_pendientes.mostrar_pendientes(conn)
-            print(f"\n{COLOR_BLUE_TITLE}¿Y ahora?¿Qué deseas hacer?{COLOR_RESET}")
+            # mostrar_pendientes.mostrar_pendientes(conn)
+            # print(f"\n{COLOR_BLUE_TITLE}¿Y ahora?¿Qué deseas hacer?{COLOR_RESET}")
         elif opcion == "2":
             marcar_completadas.marcar_completada(conn, input("Ingrese el número de la tarea a marcar como completada: "))
+            os.system("clear")
         elif opcion == "3":
-            crear_nota.crear_nota(conn)
+            crear_tarea.crear_tarea(conn)
+            os.system("clear")
+            print("Tarea Creada!")
         elif opcion == "4":
             print("ahora van las de la semana")
         elif opcion == "0":
