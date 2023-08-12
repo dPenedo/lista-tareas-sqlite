@@ -1,5 +1,6 @@
 import sqlite3
 import mostrar_pendientes
+import mostrar_descripciones
 import marcar_completadas 
 import crear_tarea
 import os
@@ -13,7 +14,7 @@ COLOR_BOLD = "\033[1m"  # Negritas
 COLOR_RESET = "\033[0m"  # Reiniciar el color
 
 def mostrar_menu():
-    print(f"{COLOR_BLUE}1.{COLOR_RESET} Volver a mostrar tareas pendientes")
+    print(f"{COLOR_BLUE}1.{COLOR_RESET} Mostrar descripciones de las tareas pendientes")
     print(f"{COLOR_BLUE}2.{COLOR_RESET} Marcar tarea como completada")
     print(f"{COLOR_BLUE}3.{COLOR_RESET} Crear una nueva tarea")
     print(f"{COLOR_BLUE}4.{COLOR_RESET} Mostrar tareas pendientes para esta semana")
@@ -23,9 +24,14 @@ def main():
     conn = sqlite3.connect('lista_de_tareas.db')
     os.system("clear")
     print(f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}")
+    contenidos_a_mostrar = "simple"
     while True:
         print("\nEstas son las Tareas que tienes pendientes:\n") 
-        mostrar_pendientes.mostrar_pendientes(conn)
+        if (contenidos_a_mostrar == "simple"):
+            mostrar_pendientes.mostrar_pendientes(conn)
+        elif (contenidos_a_mostrar == "descripcion"):
+            mostrar_descripciones.mostrar_descripciones(conn)
+            contenidos_a_mostrar = "simple"
         print("\n╚" + "═" * 48 + "╝")
         print("╔" + "═" * 48 + "╗")
         print(f"\n{COLOR_BLUE_TITLE}¿Qué deseas hacer?{COLOR_RESET}")
@@ -33,7 +39,7 @@ def main():
         opcion = input()
         if opcion == "1":
             os.system("clear")
-            print("Ahí van de nuevo:")
+            contenidos_a_mostrar = "descripcion"
             # mostrar_pendientes.mostrar_pendientes(conn)
             # print(f"\n{COLOR_BLUE_TITLE}¿Y ahora?¿Qué deseas hacer?{COLOR_RESET}")
         elif opcion == "2":
