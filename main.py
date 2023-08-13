@@ -2,6 +2,7 @@ import sqlite3
 import mostrar_pendientes
 import mostrar_descripciones
 import marcar_completadas 
+import mostrar_completadas
 import crear_tarea
 import os
 
@@ -17,7 +18,8 @@ def mostrar_menu():
     print(f"{COLOR_BLUE}1.{COLOR_RESET} Mostrar descripciones de las tareas pendientes")
     print(f"{COLOR_BLUE}2.{COLOR_RESET} Marcar tarea como completada")
     print(f"{COLOR_BLUE}3.{COLOR_RESET} Crear una nueva tarea")
-    print(f"{COLOR_BLUE}4.{COLOR_RESET} Mostrar tareas pendientes para esta semana")
+    print(f"{COLOR_BLUE}4.{COLOR_RESET} Mostrar tareas completadas")
+    print(f"{COLOR_BLUE}5.{COLOR_RESET} Mostrar tareas pendientes para esta semana")
     print(f"{COLOR_BLUE}0.{COLOR_RESET} Salir")
 
 def main():
@@ -50,6 +52,8 @@ def main():
             os.system("clear")
             print("Tarea Creada!")
         elif opcion == "4":
+            os.system("clear")
+            mostrar_completadas.mostrar_completadas(conn)
             print("ahora van las de la semana")
         elif opcion == "0":
             print("🏃 Talué! ")
