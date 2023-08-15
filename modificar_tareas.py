@@ -1,4 +1,3 @@
-import mostrar_descripciones
 import os
 
 COLOR_RESET = "\033[0m"  # Reiniciar el color
