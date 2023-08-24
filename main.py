@@ -17,12 +17,12 @@ COLOR_BOLD = "\033[1m"  # Negritas
 COLOR_RESET = "\033[0m"  # Reiniciar el color
 
 def mostrar_menu():
-    print(f"{COLOR_BLUE}1.{COLOR_RESET} Mostrar descripciones de las tareas pendientes")
+    print(f"{COLOR_BLUE}1.{COLOR_RESET} Crear una nueva tarea")
     print(f"{COLOR_BLUE}2.{COLOR_RESET} Marcar tarea como completada")
-    print(f"{COLOR_BLUE}3.{COLOR_RESET} Crear una nueva tarea")
-    print(f"{COLOR_BLUE}4.{COLOR_RESET} Mostrar tareas completadas")
-    print(f"{COLOR_BLUE}5.{COLOR_RESET} Mostrar tareas pendientes para esta semana")
-    print(f"{COLOR_BLUE}6.{COLOR_RESET} Editar una tarea pendiente")
+    print(f"{COLOR_BLUE}3.{COLOR_RESET} Editar una tarea pendiente")
+    print(f"{COLOR_BLUE}4.{COLOR_RESET} Mostrar descripciones de las tareas pendientes")
+    print(f"{COLOR_BLUE}5.{COLOR_RESET} Mostrar tareas completadas")
+    print(f"{COLOR_BLUE}6.{COLOR_RESET} Mostrar tareas pendientes para esta semana")
     print(f"{COLOR_BLUE}7.{COLOR_RESET} Eliminar una tarea pendiente")
     print(f"{COLOR_BLUE}0.{COLOR_RESET} Salir")
 
@@ -44,29 +44,30 @@ def main():
         mostrar_menu()
         opcion = input()
         if opcion == "1":
+            crear_tarea.crear_tarea(conn)
             os.system("clear")
-            contenidos_a_mostrar = "descripcion"
-            # mostrar_pendientes.mostrar_pendientes(conn)
-            # print(f"\n{COLOR_BLUE_TITLE}¿Y ahora?¿Qué deseas hacer?{COLOR_RESET}")
+            print("Tarea Creada!")
         elif opcion == "2":
             marcar_completadas.marcar_completada(conn, input("Ingrese el número de la tarea a marcar como completada: "))
             os.system("clear")
         elif opcion == "3":
-            crear_tarea.crear_tarea(conn)
-            os.system("clear")
-            print("Tarea Creada!")
-        elif opcion == "4":
-            os.system("clear")
-            mostrar_completadas.mostrar_completadas(conn)
-            print("ahora van las de la semana")
-        elif opcion == "6":
             os.system("clear")
             modificar_tareas.modificar_tareas(conn)
+        elif opcion == "4":
+            os.system("clear")
+            contenidos_a_mostrar = "descripcion"
+            print("ahora van las de la semana")
+        elif opcion == "5":
+            os.system("clear")
+            mostrar_completadas.mostrar_completadas(conn)
+        elif opcion == "6":
+            os.system("clear")
+            print("Tareas pendientes de esta semana es una funcionalidad por hacer")
         elif opcion == "7":
             os.system("clear")
             eliminar_tareas.eliminar_tareas(conn)
         elif opcion == "0":
-            print("🏃 Talué! ")
+            print("🏃 Hasta pronto! ")
             break
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
