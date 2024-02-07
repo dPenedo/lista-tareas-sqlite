@@ -1,2 +1,4 @@
 lista_de_tareas.db
 __pycache__/
+env
+.idea/

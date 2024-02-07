@@ -26,6 +26,7 @@ def mostrar_menu():
     print(f"{COLOR_BLUE}7.{COLOR_RESET} Eliminar una tarea pendiente")
     print(f"{COLOR_BLUE}0.{COLOR_RESET} Salir")
 
+
 def main():
     conn = sqlite3.connect('lista_de_tareas.db')
     os.system("clear")
@@ -33,9 +34,9 @@ def main():
     contenidos_a_mostrar = "simple"
     while True:
         print("\nEstas son las Tareas que tienes pendientes:\n") 
-        if (contenidos_a_mostrar == "simple"):
+        if contenidos_a_mostrar == "simple":
             mostrar_pendientes.mostrar_pendientes(conn)
-        elif (contenidos_a_mostrar == "descripcion"):
+        elif contenidos_a_mostrar == "descripcion":
             mostrar_descripciones.mostrar_descripciones(conn)
             contenidos_a_mostrar = "simple"
         print("\n╚" + "═" * 48 + "╝")
