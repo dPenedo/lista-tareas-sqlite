@@ -10,6 +10,10 @@ COLOR_WHITE = "\033[37m"
 COLOR_BOLD = "\033[1m"  # Negritas
 COLOR_RESET = "\033[0m"  # Reiniciar el color
 
+BASE_DE_DATOS = "db/lista_de_tareas.db"
+
+
+
 def mostrar_menu():
     print(f"{COLOR_BLUE}1.{COLOR_RESET} Crear una nueva tarea")
     print(f"{COLOR_BLUE}2.{COLOR_RESET} Marcar tarea como completada")
@@ -22,8 +26,8 @@ def mostrar_menu():
 
 
 def main():
-    inicializar_base_de_datos.inicializar_base_de_datos()
-    conn = sqlite3.connect('db/lista_de_tareas.db')
+    inicializar_base_de_datos.inicializar_base_de_datos(BASE_DE_DATOS)
+    conn = sqlite3.connect(BASE_DE_DATOS)
     os.system("clear")
     print(f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}")
     contenidos_a_mostrar = "simple"

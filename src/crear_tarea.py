@@ -3,6 +3,7 @@ COLOR_RESET = "\033[0m"  # Reiniciar el color
 COLOR_BOLD = "\033[1m"  # Negritas
 
 
+# TODO: para poder probar la funcion de crear tareas hay que refactorizar para que los inputs sean dados por parametros
 def crear_tarea(conn):
     print("Perfecto, vamos a crear una nueva tarea")
     print("Son necesarios los siguientes valores: \n- Nombre \n- Descripción de la tarea\n- Fecha límite de la tarea")
@@ -18,8 +19,10 @@ def crear_tarea(conn):
         cursor.execute(f"INSERT INTO tareas (nombre, descripcion, fecha_limite) VALUES (?,?,?)", (nombre, descripción, fecha_limite))
         conn.commit()
         print("Se ha ingresado una nueva tarea!")
+        return True
     except ValueError:
         print("Error: Ingresa un valor numérico válido para día, mes y año.")
+        return False
 
 
     # print(nombre)

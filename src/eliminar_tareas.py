@@ -27,7 +27,7 @@ def eliminar_tareas(conn):
         print(f"{COLOR_BOLD}  ¿Estás seguro de que la quieres eliminar?{COLOR_RESET}")
         continuar = input("Pulsa \"s\" si quieres eliminarla o cualquier tecla para volver al menú principal\n")
         if continuar == "s":
-            cursor.execute("DELETE FROM tareas WHERE id = ? ", (tarea_encontrada[0],))
+            cursor.execute("DELETE FROM tareas WHERE id = ? ;", (tarea_encontrada[0],))
             os.system("clear")
             print(f"la tarea {tarea_encontrada[1]} ha sido eliminada")
         else:

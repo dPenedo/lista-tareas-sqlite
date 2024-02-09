@@ -30,6 +30,7 @@ python main.py
 
 ### Funciones por hacer
 
+- Validación de fechas
 - Comprobar las tareas por hacer esta semana
 - Comprobar las tareas por hacer este mes
 - Testing: probar funciones con unittest
