@@ -1,12 +1,5 @@
 import sqlite3
-import mostrar_pendientes
-import mostrar_descripciones
-import marcar_completadas 
-import mostrar_completadas
-import modificar_tareas
-import inicializar_base_de_datos
-import eliminar_tareas
-import crear_tarea
+from src import mostrar_pendientes, mostrar_descripciones, marcar_completadas, mostrar_completadas, modificar_tareas, inicializar_base_de_datos, eliminar_tareas, crear_tarea
 import os
 
 

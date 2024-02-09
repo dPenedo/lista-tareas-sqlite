@@ -1,4 +1,6 @@
 lista_de_tareas.db
 __pycache__/
+*.pyc
 env
 .idea/
+.vscode/

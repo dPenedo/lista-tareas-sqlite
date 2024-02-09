@@ -22,10 +22,7 @@ Para utilizarlo en tu dispositivo sigue los siguientes pasos:
 git clone https://github.com/dPenedo/lista-tareas-sqlite
 cd lista-tareas-sqlite
 ```
-- Crea una tabla en sqilte, por ejemplo, con el nombre de tareas:
-``` bash
-skjdaslkdj
-```
+
 Inicia este script:
 ``` bash
 python main.py
