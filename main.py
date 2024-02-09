@@ -4,6 +4,7 @@ import mostrar_descripciones
 import marcar_completadas 
 import mostrar_completadas
 import modificar_tareas
+import inicializar_base_de_datos
 import eliminar_tareas
 import crear_tarea
 import os
@@ -28,7 +29,8 @@ def mostrar_menu():
 
 
 def main():
-    conn = sqlite3.connect('lista_de_tareas.db')
+    inicializar_base_de_datos.inicializar_base_de_datos()
+    conn = sqlite3.connect('db/lista_de_tareas.db')
     os.system("clear")
     print(f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}")
     contenidos_a_mostrar = "simple"

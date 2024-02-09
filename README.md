@@ -13,7 +13,26 @@ La idea es que cree una base de datos simple de tareas e ir agregando opciones p
 - Editar una tarea pendiente (editándola por completo o un sólo parámetro)
 - Eliminar una tarea pendiente (con una confirmación previa)
 
+
+### ¿Cómo lo puedes utilizar?
+
+Para utilizarlo en tu dispositivo sigue los siguientes pasos:
+- Clona este repositorio y entra en él:
+``` bash
+git clone https://github.com/dPenedo/lista-tareas-sqlite
+cd lista-tareas-sqlite
+```
+- Crea una tabla en sqilte, por ejemplo, con el nombre de tareas:
+``` bash
+skjdaslkdj
+```
+Inicia este script:
+``` bash
+python main.py
+```
+
 ### Funciones por hacer
 
 - Comprobar las tareas por hacer esta semana
 - Comprobar las tareas por hacer este mes
+- Testing: probar funciones con unittest
