@@ -1,5 +1,5 @@
 import sqlite3
-from src import mostrar_pendientes, mostrar_descripciones, marcar_completadas, mostrar_completadas, modificar_tareas, inicializar_base_de_datos, eliminar_tareas, crear_tarea
+from src import mostrar_pendientes, mostrar_descripciones, marcar_completadas, mostrar_completadas,editar_tareas , inicializar_base_de_datos, eliminar_tareas, crear_tarea, obtener_datos
 import os
 
 
@@ -44,15 +44,21 @@ def main():
         mostrar_menu()
         opcion = input()
         if opcion == "1":
-            crear_tarea.crear_tarea(conn)
+            print("Perfecto, vamos a crear una nueva tarea")
+            print("Son necesarios los siguientes valores: \n- Nombre \n- Descripción de la tarea\n- Fecha límite de la tarea")
+            print(f"\n{COLOR_BOLD}***************************{COLOR_RESET}\n")
+            nombre, descripcion, fecha_limite = obtener_datos.obtener_tarea_nueva()
+            crear_tarea.crear_tarea(conn, nombre, descripcion, fecha_limite)
+
             os.system("clear")
             print("Tarea Creada!")
         elif opcion == "2":
-            marcar_completadas.marcar_completada(conn, input("Ingrese el número de la tarea a marcar como completada: "))
+            seleccion = obtener_datos.obtener_tarea_seleccionada()
+            marcar_completadas.marcar_completada(conn, seleccion)
             os.system("clear")
         elif opcion == "3":
             os.system("clear")
-            modificar_tareas.modificar_tareas(conn)
+            modificar_tareas.editar_tareas(conn)
         elif opcion == "4":
             os.system("clear")
             contenidos_a_mostrar = "descripcion"

@@ -6,6 +6,7 @@ COLOR_BOLD = "\033[1m"  # Negritas
 COLOR_BLUE_TITLE = "\033[34;1;4m"
 
 def eliminar_tareas(conn):
+    # TODO: externalizar a obtener_datos id - seleccion obtener_tarea_selccionada: 
     print(f"{COLOR_BOLD}¿Qué tarea quieres eliminar?{COLOR_RESET}\n")
     cursor = conn.cursor()
     cursor.execute("SELECT id, nombre, descripcion, fecha_limite FROM tareas where completada = 0")
