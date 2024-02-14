@@ -22,7 +22,6 @@ def test_estructura_base_de_datos():
     assert columnas[2][1] == "descripcion"
     assert columnas[3][1] == "completada"
     assert columnas[4][1] == "fecha_limite"
-
     cursor.close()
 
 def test_tipos_de_datos():
