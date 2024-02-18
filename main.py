@@ -58,7 +58,7 @@ def main():
             os.system("clear")
         elif opcion == "3":
             os.system("clear")
-            modificar_tareas.editar_tareas(conn)
+            editar_tareas.editar_tareas(conn)
         elif opcion == "4":
             os.system("clear")
             contenidos_a_mostrar = "descripcion"

@@ -2,6 +2,7 @@ COLOR_BLUE = "\033[34m"
 COLOR_RESET = "\033[0m"  # Reiniciar el color
 COLOR_BOLD = "\033[1m"  # Negritas
 from datetime import date
+import os
 
 
 def obtener_tarea_nueva():
@@ -10,10 +11,29 @@ def obtener_tarea_nueva():
     fecha_limite = obtener_fecha()
     return nombre, descripcion, fecha_limite 
 
-def obtener_tarea_seleccionada():
-    seleccion = input("Seleccione el número de una tarea:\n")
-    # TODO: validacion de fechas
-    return seleccion
+# TODO: Funciona, pero falta hacerle test e implementarlo
+def obtener_tarea_seleccionada(conn):
+    while True:
+        try:
+            print("Estas son las tareas almacenadas:")
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, nombre, descripcion, fecha_limite FROM tareas")
+            tareas_pendientes = cursor.fetchall()
+            for tarea in tareas_pendientes:
+                print(f"{COLOR_BLUE}{tarea[0]}{COLOR_RESET}. {tarea[1]}.{COLOR_BOLD} {tarea[2]}{COLOR_RESET} ({tarea[3]})")
+            seleccion = int(input("Seleccione el número de una tarea:\n"))
+            tarea_encontrada = None
+            for tarea in tareas_pendientes:
+                if tarea[0] == seleccion:
+                    tarea_encontrada = tarea
+                    break
+            if tarea_encontrada is None:
+                raise ValueError("La tarea seleccionada no se encuentra en la lista")
+            print(f"La Tarea encontrada es la número {tarea_encontrada[0]}: {tarea_encontrada[1]}")
+            return tarea_encontrada
+        except ValueError as e:
+            os.system("clear")
+            print(f"Error: {e}. Por favor, introduzca una tarea válida")
 
 def obtener_fecha():
     hoy = date.today()
