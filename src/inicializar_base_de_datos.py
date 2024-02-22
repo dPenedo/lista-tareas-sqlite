@@ -15,11 +15,11 @@ def inicializar_base_de_datos(base_de_datos):
                         )''')
         conn.commit()
         print("Base de datos creada exitosamente")
-        return True
+        return conn
    
     except sqlite3.Error as e:
         print("Error al crear la base de datos")
-        return False
+        return None
 
     finally:
         if conn:

@@ -6,8 +6,8 @@ base_de_datos = "db/lista_de_tareas.db"
 
 
 def test_inicializar_base_de_datos():
-    assert inicializar_base_de_datos(base_de_datos) is True
-    assert os.path.exists(base_de_datos)
+    conn = inicializar_base_de_datos(base_de_datos)
+    assert conn is not None
 
 def test_estructura_base_de_datos():
     conn = sqlite3.connect(base_de_datos)

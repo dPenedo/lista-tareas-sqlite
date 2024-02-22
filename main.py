@@ -22,6 +22,7 @@ def mostrar_menu():
     print(f"{COLOR_BLUE}5.{COLOR_RESET} Mostrar tareas completadas")
     print(f"{COLOR_BLUE}6.{COLOR_RESET} Mostrar tareas pendientes para esta semana")
     print(f"{COLOR_BLUE}7.{COLOR_RESET} Eliminar una tarea pendiente")
+    print(f"{COLOR_BLUE}8.{COLOR_RESET} TEST")
     print(f"{COLOR_BLUE}0.{COLOR_RESET} Salir")
 
 
@@ -72,6 +73,9 @@ def main():
         elif opcion == "7":
             os.system("clear")
             eliminar_tareas.eliminar_tareas(conn)
+        elif opcion == "8":
+            os.system("clear")
+            obtener_datos.obtener_tarea_seleccionada(conn)
         elif opcion == "0":
             print("🏃 Hasta pronto! ")
             break
