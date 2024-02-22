@@ -7,7 +7,7 @@ COLOR_UNDERLINE = "\033[4m"  # Subrayado
 
 def mostrar_pendientes(conn):
     cursor = conn.cursor()
-    cursor.execute('SELECT id, nombre FROM tareas WHERE completada = 0')
+    cursor.execute("SELECT id, nombre FROM tareas WHERE completada = 0")
     tareas_pendientes = cursor.fetchall()
 
     print(f"{COLOR_BLUE_TITLE}Tareas pendientes:{COLOR_RESET}")

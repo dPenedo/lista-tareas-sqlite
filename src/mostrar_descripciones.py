@@ -11,5 +11,6 @@ def mostrar_descripciones(conn):
     tareas_pendientes = cursor.fetchall()
     print(f"{COLOR_BLUE_TITLE}Descripciones:{COLOR_RESET}")
     for tarea in tareas_pendientes:
-        print(f"{COLOR_BLUE}{tarea[0]}{COLOR_RESET}. {tarea[1]}.{COLOR_BOLD} {tarea[2]}{COLOR_RESET}")
-
+        print(
+            f"{COLOR_BLUE}{tarea[0]}{COLOR_RESET}. {tarea[1]}.{COLOR_BOLD} {tarea[2]}{COLOR_RESET}"
+        )

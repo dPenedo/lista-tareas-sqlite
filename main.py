@@ -1,5 +1,15 @@
 import sqlite3
-from src import mostrar_pendientes, mostrar_descripciones, marcar_completadas, mostrar_completadas,editar_tareas , inicializar_base_de_datos, eliminar_tareas, crear_tarea, obtener_datos
+from src import (
+    mostrar_pendientes,
+    mostrar_descripciones,
+    marcar_completadas,
+    mostrar_completadas,
+    editar_tareas,
+    inicializar_base_de_datos,
+    eliminar_tareas,
+    crear_tarea,
+    obtener_datos,
+)
 import os
 
 
@@ -11,7 +21,6 @@ COLOR_BOLD = "\033[1m"  # Negritas
 COLOR_RESET = "\033[0m"  # Reiniciar el color
 
 BASE_DE_DATOS = "db/lista_de_tareas.db"
-
 
 
 def mostrar_menu():
@@ -30,10 +39,12 @@ def main():
     inicializar_base_de_datos.inicializar_base_de_datos(BASE_DE_DATOS)
     conn = sqlite3.connect(BASE_DE_DATOS)
     os.system("clear")
-    print(f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}")
+    print(
+        f"\n{COLOR_BLUE}Hola! 👋  Bienvenido a tu Administrador de Tareas{COLOR_RESET}"
+    )
     contenidos_a_mostrar = "simple"
     while True:
-        print("\nEstas son las Tareas que tienes pendientes:\n") 
+        print("\nEstas son las Tareas que tienes pendientes:\n")
         if contenidos_a_mostrar == "simple":
             mostrar_pendientes.mostrar_pendientes(conn)
         elif contenidos_a_mostrar == "descripcion":
@@ -46,7 +57,9 @@ def main():
         opcion = input()
         if opcion == "1":
             print("Perfecto, vamos a crear una nueva tarea")
-            print("Son necesarios los siguientes valores: \n- Nombre \n- Descripción de la tarea\n- Fecha límite de la tarea")
+            print(
+                "Son necesarios los siguientes valores: \n- Nombre \n- Descripción de la tarea\n- Fecha límite de la tarea"
+            )
             print(f"\n{COLOR_BOLD}***************************{COLOR_RESET}\n")
             nombre, descripcion, fecha_limite = obtener_datos.obtener_tarea_nueva()
             crear_tarea.crear_tarea(conn, nombre, descripcion, fecha_limite)
@@ -82,6 +95,7 @@ def main():
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
     conn.close()
+
 
 if __name__ == "__main__":
     main()

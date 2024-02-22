@@ -9,6 +9,7 @@ def test_inicializar_base_de_datos():
     conn = inicializar_base_de_datos(base_de_datos)
     assert conn is not None
 
+
 def test_estructura_base_de_datos():
     conn = sqlite3.connect(base_de_datos)
     cursor = conn.cursor()
@@ -24,6 +25,7 @@ def test_estructura_base_de_datos():
     assert columnas[4][1] == "fecha_limite"
     cursor.close()
 
+
 def test_tipos_de_datos():
     conn = sqlite3.connect(base_de_datos)
     cursor = conn.cursor()
@@ -38,5 +40,3 @@ def test_tipos_de_datos():
     assert columnas[4][2] == "DATE"
 
     cursor.close()
-
-
