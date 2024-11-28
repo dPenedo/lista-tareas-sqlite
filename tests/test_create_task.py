@@ -1,22 +1,19 @@
-from src.crear_tarea import crear_tarea
-from src.inicializar_base_de_datos import inicializar_base_de_datos
-import os
 import sqlite3
-from unittest.mock import patch
-from main import BASE_DE_DATOS
+from src.start_database import start_database
+from main import DATABASE
 
 
-base_de_datos = BASE_DE_DATOS
+database = DATABASE
 
 
 def setup_module():
     # Inicializa la base de datos antes de ejecutar las pruebas
-    inicializar_base_de_datos(base_de_datos)
-    insertar_tarea_prueba()
+    start_database(database)
+    insert_test_task()
 
 
-def insertar_tarea_prueba():
-    conn = sqlite3.connect(base_de_datos)
+def insert_test_task():
+    conn = sqlite3.connect(database)
     cursor = conn.cursor()
     # Inserta una tarea específica en la base de datos
     cursor.execute(

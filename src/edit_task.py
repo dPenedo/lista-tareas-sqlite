@@ -6,7 +6,7 @@ COLOR_BOLD = "\033[1m"  # Negritas
 COLOR_BLUE_TITLE = "\033[34;1;4m"
 
 
-def editar_tareas(conn):
+def edit_task(conn):
     # TODO: externalizar a obtener_datos los siguientes datos
     # Datos:
     # id_seleccion
@@ -19,23 +19,23 @@ def editar_tareas(conn):
     cursor.execute(
         "SELECT id, nombre, descripcion, fecha_limite FROM tareas where completada = 0"
     )
-    tareas_pendientes = cursor.fetchall()
+    pendint_tasks = cursor.fetchall()
     print(f"{COLOR_BLUE_TITLE}Tareas a modificar:{COLOR_RESET}")
-    for tarea in tareas_pendientes:
+    for task in pendint_tasks:
         print(
-            f"{COLOR_BLUE}{tarea[0]}{COLOR_RESET}. {tarea[1]}.{COLOR_BOLD} {tarea[2]}{COLOR_RESET} ({tarea[3]})"
+            f"{COLOR_BLUE}{task[0]}{COLOR_RESET}. {task[1]}.{COLOR_BOLD} {task[2]}{COLOR_RESET} ({task[3]})"
         )
-    tarea_elegida = int(input("Selecciona el número: "))  # id_seleccion
+    chosen_task = int(input("Selecciona el número: "))  # id_seleccion
 
-    tarea_encontrada = None
+    found_task = None
 
-    for tarea in tareas_pendientes:
-        if tarea[0] == tarea_elegida:
-            tarea_encontrada = tarea
+    for task in pendint_tasks:
+        if task[0] == chosen_task:
+            found_task = task
             break
 
-    if tarea_encontrada:
-        print(f"La tarea elegida es:{COLOR_BOLD}{tarea_encontrada[1]}{COLOR_RESET}")
+    if found_task:
+        print(f"La tarea elegida es:{COLOR_BOLD}{found_task[1]}{COLOR_RESET}")
         print(f"{COLOR_BOLD}¿Y qué quieres modificar?{COLOR_RESET} \n")
         print(f"{COLOR_BLUE}1.{COLOR_RESET} El nombre de la Tarea")
         print(f"{COLOR_BLUE}2.{COLOR_RESET} La descripción de la tarea")
@@ -44,53 +44,53 @@ def editar_tareas(conn):
         print(
             f"{COLOR_BLUE}Cualquier tecla.{COLOR_RESET} Nada, quiero volver al menú inicial"
         )
-        columna_elegida = input("¿Qué quieres modificar? ")
-        if columna_elegida == "1":
-            nombre = input("\n¿Qué nuevo nombre quieres darle? ")  # nombre
+        found_column = input("¿Qué quieres modificar? ")
+        if found_column == "1":
+            name = input("\n¿Qué nuevo nombre quieres darle? ")  # nombre
             cursor.execute(
                 "UPDATE tareas SET nombre= ?  WHERE id = ?",
-                (nombre, tarea_encontrada[0]),
+                (name, found_task[0]),
             )
             conn.commit()
             print("El nombre ha sido modificado")
 
-        elif columna_elegida == "2":
-            descripcion = input(
+        elif found_column == "2":
+            description = input(
                 "\n¿Qué nueva descripción quieres darle?"
             )  # descripcion
             cursor.execute(
                 "UPDATE tareas SET descripcion= ?  WHERE id = ?",
-                (descripcion, tarea_encontrada[0]),
+                (description, found_task[0]),
             )
             conn.commit()
             print("La descripción ha sido modificado")
-        elif columna_elegida == "3":
-            dia_limite = int(input(f"{COLOR_BLUE}Fecha limite: \n\tDía: {COLOR_RESET}"))
-            mes_limite = int(input(f"{COLOR_BLUE}\tMes: {COLOR_RESET}"))
-            ano_limite = int(input(f"{COLOR_BLUE}\tAño: {COLOR_RESET}"))
-            fecha_limite = (
-                f"{ano_limite:04d}-{mes_limite:02d}-{dia_limite:02d}"  # fecha_limite
+        elif found_column == "3":
+            day_deadline = int(input(f"{COLOR_BLUE}Fecha limite: \n\tDía: {COLOR_RESET}"))
+            month_deadline = int(input(f"{COLOR_BLUE}\tMes: {COLOR_RESET}"))
+            year_deadline = int(input(f"{COLOR_BLUE}\tAño: {COLOR_RESET}"))
+            date_deadline = (
+                f"{year_deadline:04d}-{month_deadline:02d}-{day_deadline:02d}"  # fecha_limite
             )
             cursor.execute(
                 "UPDATE tareas SET fecha_limite= ?  WHERE id = ?",
-                (fecha_limite, tarea_encontrada[0]),
+                (date_deadline, found_task[0]),
             )
             conn.commit()
             print("La fecha límite ha sido modificada")
-        elif columna_elegida == "4":
-            nombre = input("\n¿Qué nuevo nombre quieres darle? ")  # nombre
-            descripcion = input(
+        elif found_column == "4":
+            name = input("\n¿Qué nuevo nombre quieres darle? ")  # nombre
+            description = input(
                 "\n¿Qué nueva descripción quieres darle?"
             )  # descripcion
-            dia_limite = int(input(f"{COLOR_BLUE}Fecha limite: \n\tDía: {COLOR_RESET}"))
-            mes_limite = int(input(f"{COLOR_BLUE}\tMes: {COLOR_RESET}"))
-            ano_limite = int(input(f"{COLOR_BLUE}\tAño: {COLOR_RESET}"))
-            fecha_limite = (
-                f"{ano_limite:04d}-{mes_limite:02d}-{dia_limite:02d}"  # fecha_limite
+            day_deadline = int(input(f"{COLOR_BLUE}Fecha limite: \n\tDía: {COLOR_RESET}"))
+            month_deadline = int(input(f"{COLOR_BLUE}\tMes: {COLOR_RESET}"))
+            year_deadline = int(input(f"{COLOR_BLUE}\tAño: {COLOR_RESET}"))
+            date_deadline = (
+                f"{year_deadline:04d}-{month_deadline:02d}-{day_deadline:02d}"  # fecha_limite
             )
             cursor.execute(
                 "UPDATE tareas SET nombre= ?, descripcion= ? , fecha_limite = ?  WHERE id = ?",
-                (nombre, descripcion, fecha_limite, tarea_encontrada[0]),
+                (name, description, date_deadline, found_task[0]),
             )
             conn.commit()
             print("El nombre, la descripcion y a fecha limite han sido modificados")
