@@ -1,11 +1,12 @@
 import sqlite3
 
 
-def start_database(database):
+def start_database(database: str):
+    """Inicializa la base de datos y la crea si no existe"""
     try:
         conn = sqlite3.connect(database)
         cursor = conn.cursor()
-        cursor.execute(
+        _ = cursor.execute(
             """CREATE TABLE IF NOT EXISTS tareas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
