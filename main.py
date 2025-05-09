@@ -6,28 +6,17 @@ from src import (
     mark_as_completed,
     show_completed,
     edit_task,
+    show_options,
     start_database,
     delete_task,
     create_task,
     get_data,
 )
-from src.ui.colorize import colorize
+from src.ui.colorize import Color, colorize
 
 import os
 
 DATABASE = "db/lista_de_tareas.db"
-
-
-def mostrar_menu():
-    print(f"{colorize("1. ", "BLUE")} Create a new task")
-    print(f"{colorize("2. ", "BLUE")} Mark a task as completed")
-    print(f"{colorize("3. ", "BLUE")} Edit a pending task")
-    print(f"{colorize("4. ", "BLUE")} Show descriptions of pending tasks")
-    print(f"{colorize("5. ", "BLUE")} Show completed tasks")
-    print(f"{colorize("6. ", "BLUE")} Show pending tasks for this week")
-    print(f"{colorize("7. ", "BLUE")} Delete a pending task")
-    print(f"{colorize("8. ", "BLUE")} TEST")
-    print(f"{colorize("0. ", "BLUE")} Exit")
 
 
 def main():
@@ -36,7 +25,7 @@ def main():
     _ = start_database.start_database(DATABASE)
     conn = sqlite3.connect(DATABASE)
     _ = os.system("clear")
-    print(f"\n{colorize("Hello! 👋 Welcome to your Task Manager" ,"BLUE")}")
+    print(f"\n{colorize("Hello! 👋 Welcome to your Task Manager" ,Color.BLUE)}")
     content_to_show = "simple"
     while True:
         print("\nHere are your pending tasks:\n")
@@ -45,19 +34,18 @@ def main():
         elif content_to_show == "descripcion":
             _ = show_descriptions.show_descriptions(conn)
             content_to_show = "simple"
-        print("\n╚" + "═" * 48 + "╝")
-        print("╔" + "═" * 48 + "╗")
-        print(colorize("What would you like to do?", "BLUE"))
-        mostrar_menu()
+        print("-" * 50)
+        print(colorize("What would you like to do?", Color.BLUE))
+        show_options.show_menu()
         opcion = input()
         if opcion == "1":
             print("Great, let's create a new task")
             print(
                 "The following values are required: \n- Name \n- Task description\n- Task deadline"
             )
-            print(colorize("***************************", "RESET"))
+            print(colorize("***************************", Color.RESET))
             name, descripcion, date_deadline = get_data.get_new_task()
-            create_task.create_task(conn, name, descripcion, date_deadline)
+            _ = create_task.create_task(conn, name, descripcion, date_deadline)
 
             _ = os.system("clear")
             print("Task Created!")

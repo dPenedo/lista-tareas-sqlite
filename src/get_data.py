@@ -1,5 +1,8 @@
 from datetime import date
 import os
+import sqlite3
+
+from src.ui.colorize import colorize, Color
 
 COLOR_BLUE = "\033[34m"
 COLOR_RESET = "\033[0m"  # Reset color
@@ -7,23 +10,26 @@ COLOR_BOLD = "\033[1m"  # Bold
 
 
 def get_new_task():
-    name = input(f"{COLOR_BLUE}Task name: {COLOR_RESET}")
-    description = input(f"{COLOR_BLUE}Task description: {COLOR_RESET}")
+    name = input(colorize("Task name: ", Color.BLUE))
+    description = input(colorize("Task description: ", Color.BLUE))
     date_deadline = get_deadline()
     return name, description, date_deadline
 
 
 # TODO: Works, but needs testing and further implementation
-def get_selected_task(conn):
+def get_selected_task(conn: sqlite3.Connection) -> int:
     while True:
         try:
             print("These are the stored tasks:")
             cursor = conn.cursor()
-            cursor.execute("SELECT id, nombre, descripcion, fecha_limite FROM tareas")
-            pending_tasks = cursor.fetchall()
+            _ = cursor.execute(
+                "SELECT id, nombre, descripcion, fecha_limite FROM tareas"
+            )
+            pending_tasks: list[tuple[int, str, str, str]] = cursor.fetchall()
             for task in pending_tasks:
+                print("**" * 12)
                 print(
-                    f"{COLOR_BLUE}{task[0]}{COLOR_RESET}. {task[1]}.{COLOR_BOLD} {task[2]}{COLOR_RESET} ({task[3]})"
+                    f"{colorize(str(task[0]), Color.BLUE)}. {task[1]}.{colorize(task[2], Color.BOLD)} ({task[3]})"
                 )
             selection = int(input("Select the number of a task:\n"))
             found_task = None
@@ -33,12 +39,10 @@ def get_selected_task(conn):
                     break
             if found_task is None:
                 raise ValueError("The selected task is not in the list")
-            print(
-                f"The task found is number {found_task[0]}: {found_task[1]}"
-            )
-            return found_task
+            print(f"You selected task number {found_task[0]}: {found_task[1]}")
+            return found_task[0]
         except ValueError as e:
-            os.system("clear")
+            _ = os.system("clear")
             print(f"Error: {e}. Please enter a valid task")
 
 

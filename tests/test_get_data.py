@@ -16,7 +16,7 @@ def test_tarea_seleccionada(mock_input):
     conn = sqlite3.connect(":memory:")
     try:
         cursor = conn.cursor()
-        cursor.execute(
+        _ = cursor.execute(
             """
             CREATE TABLE tareas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,13 +32,13 @@ def test_tarea_seleccionada(mock_input):
             ("Tarea 3", "Descripción de la tarea 3", "2024-02-24"),
             ("Tarea 4", "Descripción de la tarea 4", "2024-02-25"),
         ]
-        cursor.executemany(
+        _ = cursor.executemany(
             "INSERT INTO tareas (nombre, descripcion, fecha_limite) VALUES (?, ?, ?)",
             tareas_de_test,
         )
         conn.commit()
 
         tarea_seleccionada = get_selected_task(conn)
-        assert tarea_seleccionada[0] == 2  # ID de la tarea seleccionada
+        assert tarea_seleccionada == 2  # ID de la tarea seleccionada
     finally:
         conn.close()

@@ -1,12 +1,14 @@
-COLORS = {
-    "RESET": "\033[0m",
-    "BLUE": "\033[34m",
-    "BLUE_TITLE": "\033[34;1;4m",
-    "WHITE": "\033[37m",
-    "BOLD": "\033[1m",
-}
+from enum import Enum
 
 
-def colorize(text: str, *color_keys: str):
-    color_codes = "".join(COLORS.get(key, "") for key in color_keys)
-    return f"{color_codes}{text}{COLORS["RESET"]}"
+class Color(str, Enum):
+    RESET = ("\033[0m",)
+    BLUE = ("\033[34m",)
+    BLUETITLE = ("\033[34;1;4m",)
+    WHITE = ("\033[37m",)
+    BOLD = ("\033[1m",)
+    RED = ("\033[31m",)
+
+
+def colorize(text: str, color: Color):
+    return f"{color.value}{text}{Color.RESET.value}"

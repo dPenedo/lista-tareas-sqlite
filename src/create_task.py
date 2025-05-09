@@ -1,6 +1,9 @@
 import sqlite3
 
-def create_task(conn, nombre, descripcion, fecha_limite):
+
+def create_task(
+    conn: sqlite3.Connection, nombre: str, descripcion: str, fecha_limite: str
+):
     """
     Inserts a new task into the 'tareas' table.
 
@@ -15,7 +18,7 @@ def create_task(conn, nombre, descripcion, fecha_limite):
     """
     try:
         cursor = conn.cursor()
-        cursor.execute(
+        _ = cursor.execute(
             "INSERT INTO tareas (nombre, descripcion, fecha_limite) VALUES (?, ?, ?)",
             (nombre, descripcion, fecha_limite),
         )
